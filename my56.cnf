@@ -1,0 +1,71 @@
+# my.cnf
+
+[mysql]
+no_auto_rehash
+prompt           = '\u@mba mysql>'
+
+
+[mysqld]
+# GENERAL
+datadir                      = /var/lib/mysql
+socket                       = /var/lib/mysql/mysql.sock
+pid_file                     = /var/lib/mysql/mysql.pid
+user                         = mysql
+port                         = 3306
+default_storage_engine       = InnoDB
+character_set_server         = utf8
+
+# LOGGING
+log_error                 = /var/lib/mysql/mysql-error.log
+slow_query_log
+long_query_time           = 1
+slow_query_log_file       = /var/lib/mysql/slow.log
+log_slow_slave_statements
+
+# INNODB
+innodb_buffer_pool_size = 1G # mysql onry 70 - 80 % / 128M,256M,512M, ...
+innodb_log_file_size    = 1G # 1M - 8M,32 - 128M  / 512M,1G
+innodb_file_per_table   = 1 # MySQL5.6 default
+#innodb_flush_method    = O_DIRECT #RAID onry
+#innodb_flush_method	= fdatasync #default
+
+innodb_file_format = Barracuda
+
+# MyISAM
+key_buffer_size      = 32M #32M(use groupby index)
+
+# OTHER
+tmp_table_size       = 32M
+max_heap_table_size  = 32M
+query_cache_type     = 0
+query_cache_size     = 0
+max_connections      = 256 #256 512
+thread_cache_size    = 20 #Max 256
+#table_cache_size     = 2560 # 0 < max_connections*10 < 10000
+open_files_limit     = 65535
+
+expire_logs_days     = 14
+#max_connect_errors  = #default (Blocked Atacck)
+skip_name_resolve
+
+# replication
+log_bin              = /var/lib/mysql/mysql-bin
+server_id            = 10
+
+# slave server onry
+# replication
+#relay_log          = /var/lib/mysql/mysql-relay-bin
+#log_slave_updates  = 1 #Make Grandson or Make Active/Passive
+#read_onry          = 1
+
+#skip_slave_start
+#slave_net_timeout = 30 #default 60min
+
+# Delay
+#sync_master_info
+#sync_relay_log
+#sync_relay_log_info
+
+[client]
+socket               = /var/lib/mysql/mysql.sock
+port                 = 3306
