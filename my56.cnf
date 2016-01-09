@@ -23,10 +23,10 @@ slow_query_log_file       = /var/lib/mysql/slow.log
 log_slow_slave_statements
 
 # INNODB
-innodb_buffer_pool_size = 1G # mysql onry 70 - 80 % / 128M,256M,512M, ...
+innodb_buffer_pool_size = 1G # mysql only 70 - 80 % / 128M,256M,512M, ...
 innodb_log_file_size    = 1G # 1M - 8M,32 - 128M  / 512M,1G
 innodb_file_per_table   = 1 # MySQL5.6 default
-#innodb_flush_method    = O_DIRECT #RAID onry
+#innodb_flush_method    = O_DIRECT #RAID only
 #innodb_flush_method	= fdatasync #default
 
 innodb_file_format = Barracuda
