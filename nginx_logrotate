@@ -1,0 +1,18 @@
+### file /etc/logrotate.d/nginx
+### cp -ip ./nginx_logrotate /etc/logrotate.d/nginx
+
+### change ###
+### mast : /usr/local/nginx/logs/nginx.pid
+
+/usr/local/nginx/logs/*.log {
+        weekly
+        missingok
+        rotate 30
+        compress
+        delaycompress
+        notifempty
+        sharedscripts
+        postrotate
+                [ ! -f /usr/local/nginx/logs/nginx.pid ] || kill -USR1 `cat /usr/local/nginx/logs/nginx.pid`
+        endscript
+}
