@@ -1,0 +1,50 @@
+[mysqld]
+default_storage_engine = Innodb
+character_set_server = utf8
+skip_name_resolve
+basedir = /usr/local/mysql57
+datadir = /var/lib/mysql/
+pid_file = /var/lib/mysql/mysql.pid
+socket = /tmp/mysql.sock
+port = 3306
+max_connections = 128
+thread_cache_size = 20
+open_files_limit = 65535
+
+server_id = 100
+log_bin=mysql-bin
+
+###5.7 default sql_mode
+###sql_mode=ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+
+log_error = /var/lib/mysql/mysql-error.log
+slow_query_log
+long_query_time = 1
+slow_query_log_file = /var/lib/mysql/slow.log
+log_slow_slave_statements
+
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 1G
+innodb_data_file_path= ibdata1:10M:autoextend
+join_buffer_size = 128M
+sort_buffer_size = 2M
+read_rnd_buffer_size = 2M
+innodb_file_format = Barracuda
+query_cache_type = 0
+query_cache_size = 0
+
+
+### 5.7 ###
+innodb_buffer_pool_dump_at_shutdown = ON
+innodb_buffer_pool_load_at_startup = OFF
+innodb_temp_data_file_path=ibtmp1:12M # default ibtmp1:12M:autoextend
+log_timestamps = SYSTEM
+binlog_format = STATEMENT # default ROW
+
+[mysql]
+no_auto_rehash
+prompt = '\u@\h mysql>'
+
+[client]
+socket = /tmp/mysql.sock
+port = 3306
